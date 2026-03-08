@@ -25,7 +25,7 @@ export function AppSidebar() {
       <SidebarHeader className="bg-white px-6 py-8">
         <SidebarMenu>
           <SidebarMenuItem className="flex items-center gap-3">
-            <div className="h-10 w-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 rotate-3 group-hover:rotate-0 transition-transform">
+            <div className="h-10 w-10 bg-primary flex items-center justify-center shadow-lg shadow-primary/20 rotate-3 group-hover:rotate-0 transition-transform">
               <Image src="/logo.svg" alt="logo" height={24} width={24} className="brightness-0 invert" />
             </div>
             <div className="flex flex-col">

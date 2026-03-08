@@ -39,7 +39,7 @@ export function DataTablePagination<TData>({
   const canPreviousPage = page > 1 ? true : false;
   const canNextPage = page < totalPages ? true : false;
   return (
-    <div className="flex items-center justify-between px-4 py-2 bg-white border-t-2 border-slate-900">
+    <div className="flex items-center justify-between px-4 py-2 bg-white border-t border-slate-300">
       <div className="flex items-center gap-6">
         <div className="flex items-center gap-3">
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
@@ -52,10 +52,10 @@ export function DataTablePagination<TData>({
               setPage?.(1);
             }}
           >
-            <SelectTrigger className="h-9 w-[75px] rounded-none border-2 border-slate-900 bg-white font-black text-xs focus:ring-0 focus:ring-offset-0 transition-all">
+            <SelectTrigger className="h-9 w-18 rounded-none border border-slate-300 bg-white font-black text-xs focus:ring-0 focus:ring-offset-0 transition-all">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent className="rounded-none border-2 border-slate-900 shadow-[4px_4px_0px_rgba(0,0,0,0.1)]">
+            <SelectContent className="rounded-none border border-slate-300 shadow-[4px_4px_0px_rgba(0,0,0,0.1)]">
               {[10, 25, 50].map((size) => (
                 <SelectItem
                   key={size}
@@ -77,7 +77,7 @@ export function DataTablePagination<TData>({
       </div>
 
       <div className="flex items-center gap-2">
-        <div className="flex items-center bg-white border-2 border-slate-900 p-0.5 shadow-[4px_4px_0px_rgba(0,0,0,0.05)]">
+        <div className="flex items-center bg-white border border-slate-300 p-0.5 shadow-[4px_4px_0px_rgba(0,0,0,0.05)]">
           {/* Navigation Buttons */}
           <Button
             variant="ghost"
@@ -99,7 +99,7 @@ export function DataTablePagination<TData>({
           </Button>
 
           {/* Tactical Page Input Area */}
-          <div className="flex items-center px-4 gap-2 bg-slate-50 border-x-2 border-slate-900 h-8">
+          <div className="flex items-center px-4 gap-2 bg-slate-50 border-x-2 border-slate-300 h-8">
             <span className="text-[9px] font-black text-slate-400 uppercase tracking-tighter">Page</span>
             <div className="relative">
               <input

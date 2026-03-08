@@ -81,7 +81,7 @@ export function DataTable<TData, TValue>({
     },
   });
   return (
-    <div className="rounded-none border-2 border-slate-900 bg-white shadow-[8px_8px_0px_rgba(0,0,0,0.05)] overflow-hidden">
+    <div className="rounded-none border border-slate-300 bg-white shadow-[8px_8px_0px_rgba(0,0,0,0.05)] overflow-hidden">
       <div className="overflow-x-auto">
         <Table>
           <TableHeader className="bg-slate-900">
@@ -126,7 +126,7 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-40 text-center bg-slate-50/50">
                   <div className="flex flex-col items-center justify-center text-slate-300 gap-3">
-                    <div className="p-4 rounded-none border-2 border-dashed border-slate-200">
+                    <div className="p-4 rounded-none border border-dashed border-slate-200">
                       <SearchX size={32} strokeWidth={1} />
                     </div>
                     <p className="font-black uppercase tracking-[0.3em]">No_Data_In_Record</p>

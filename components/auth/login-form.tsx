@@ -1,7 +1,14 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import { ArrowRight, Eye, EyeOff, Loader2, ShieldAlert, UserCheck } from "lucide-react";
+import {
+  ArrowRight,
+  Eye,
+  EyeOff,
+  Loader2,
+  ShieldAlert,
+  UserCheck,
+} from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import * as React from "react";
@@ -144,11 +151,15 @@ export function LoginForm({
       {...props}
     >
       {/* Decorative Background Elements - Blueprint Grid */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{ backgroundImage: `linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)`, backgroundSize: '40px 40px' }}
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)`,
+          backgroundSize: "40px 40px",
+        }}
       />
 
-      <div className="w-full max-w-[400px] space-y-6 relative z-10">
+      <div className="w-full max-w-100 space-y-6 relative z-10">
         <div className="flex flex-col items-center gap-4">
           {/* Logo with Automotive Hexagon/Industrial Shield shape */}
           <div className="h-16 w-16 bg-orange-600 flex items-center justify-center shadow-[0_10px_20px_rgba(234,88,12,0.3)] clip-path-hexagon relative">
@@ -175,10 +186,10 @@ export function LoginForm({
 
           <CardHeader className="pt-10 pb-6 px-10">
             <CardTitle className="text-xl font-black tracking-tighter text-slate-900 uppercase italic">
-              Terminal Login
+              LOGIN
             </CardTitle>
             <CardDescription className="text-[10px] font-mono uppercase tracking-widest text-slate-400 mt-2">
-              System Authentication Required // Area 51
+              Please input your email and password
             </CardDescription>
           </CardHeader>
 
@@ -197,17 +208,17 @@ export function LoginForm({
                     htmlFor="email"
                     className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 group-focus-within:text-orange-600 transition-colors"
                   >
-                    Operator ID (Email)
+                    Email
                   </FieldLabel>
                   <div className="relative">
                     <Input
                       id="email"
                       type="email"
                       placeholder="admin@nestims.com"
-                      className="h-12 rounded-none border-slate-200 bg-white px-4 focus:border-orange-600 transition-all focus:ring-0 text-sm font-medium"
+                      className="h-12 rounded-none border-slate-200 bg-white px-4 focus:border-orange-600 transition-all focus:ring-0 text-sm font-medium placeholder:text-slate-300"
                       {...register("email", { required: true })}
                     />
-                    <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-600 transition-all group-focus-within:w-full" />
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-600 transition-all group-focus-within:w-full" />
                   </div>
                 </div>
 
@@ -216,14 +227,14 @@ export function LoginForm({
                     htmlFor="password"
                     className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 group-focus-within:text-orange-600 transition-colors"
                   >
-                    Security Access Key
+                    Password
                   </FieldLabel>
                   <div className="relative">
                     <Input
                       id="password"
                       type={showPassword ? "text" : "password"}
                       placeholder="••••••••"
-                      className="h-12 rounded-none border-slate-200 bg-white px-4 focus:border-orange-600 transition-all focus:ring-0 text-sm"
+                      className="h-12 rounded-none border-slate-200 bg-white px-4 focus:border-orange-600 transition-all focus:ring-0 text-sm placeholder:text-slate-300"
                       {...register("password", { required: true })}
                     />
                     <button
@@ -233,7 +244,7 @@ export function LoginForm({
                     >
                       {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                     </button>
-                    <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-600 transition-all group-focus-within:w-full" />
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-600 transition-all group-focus-within:w-full" />
                   </div>
                 </div>
               </div>
@@ -248,7 +259,11 @@ export function LoginForm({
                     <Loader2 className="animate-spin" size={20} />
                   ) : (
                     <span className="flex items-center gap-2">
-                      Initialize Session <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                      Sign In{" "}
+                      <ArrowRight
+                        size={16}
+                        className="group-hover:translate-x-1 transition-transform"
+                      />
                     </span>
                   )}
                 </Button>
@@ -258,7 +273,9 @@ export function LoginForm({
                     <span className="w-full border-t border-slate-100" />
                   </div>
                   <div className="relative flex justify-center text-[9px] uppercase font-bold tracking-[0.3em]">
-                    <span className="bg-white px-4 text-slate-300">Override Mode</span>
+                    <span className="bg-white px-4 text-slate-300">
+                      Override Mode
+                    </span>
                   </div>
                 </div>
 
@@ -279,7 +296,8 @@ export function LoginForm({
 
         <div className="flex flex-col items-center gap-1">
           <p className="text-[10px] font-mono text-slate-400 tracking-tight">
-            System Status: <span className="text-green-500 animate-pulse">Online</span>
+            System Status:{" "}
+            <span className="text-green-500 animate-pulse">Online</span>
           </p>
           <p className="text-[9px] font-bold text-slate-400 tracking-[0.2em] uppercase">
             &copy; 2026 NestIMS Automotive Logistics

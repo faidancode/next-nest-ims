@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { LoginResponse as LoginResponseType } from "@/types";
 
-export const MOBILE_CLIENT_ID = "mobile-client";
+export const MOBILE_CLIENTId = "mobile-client";
 
 export enum ClientType {
   WEB = "WEB",

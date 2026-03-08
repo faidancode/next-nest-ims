@@ -1,57 +1,57 @@
-// src/lib/hooks/useBrands.ts
+// src/lib/hooks/useWarehouses.ts
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
-  getBrands,
-  createBrand,
-  updateBrand,
-  deleteBrand,
-  getBrandById,
-} from "@/lib/api/brand";
+  getWarehouses,
+  createWarehouse,
+  updateWarehouse,
+  deleteWarehouse,
+  getWarehouseById,
+} from "@/lib/api/warehouse";
 import { toast } from "sonner";
 import { getErrorMessage, getReadableErrorCode } from "@/lib/api/errors";
-import { BrandFormValues } from "@/lib/validations/warehouse-schema";
+import { WarehouseFormValues } from "@/lib/validations/warehouse.schema";
 
 // ✅ Hook untuk mendapatkan daftar kategori
-export const useBrands = (
+export const useWarehouses = (
   page: number,
   limit: number,
   search: string,
   sort: string,
 ) => {
   return useQuery({
-    queryKey: ["brands", page, limit, search, sort], // Pastikan queryKey berubah saat page/search berubah
-    queryFn: () => getBrands(page, limit, search, sort),
+    queryKey: ["warehouses", page, limit, search, sort], // Pastikan queryKey berubah saat page/search berubah
+    queryFn: () => getWarehouses(page, limit, search, sort),
     staleTime: 1000 * 60,
   });
 };
 
-export const useBrandById = (id: string) => {
+export const useWarehouseById = (id: string) => {
   return useQuery({
-    queryKey: ["brand", id], // Pastikan queryKey berubah saat id berubah
-    queryFn: () => getBrandById(id), // Assuming getListingById is a function that fetches a listing by ID
+    queryKey: ["warehouse", id], // Pastikan queryKey berubah saat id berubah
+    queryFn: () => getWarehouseById(id), // Assuming getListingById is a function that fetches a listing by ID
   });
 };
 
-export const useCreateBrand = () => {
+export const useCreateWarehouse = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (data: BrandFormValues) => {
-      return createBrand(data);
+    mutationFn: async (data: WarehouseFormValues) => {
+      return createWarehouse(data);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["brands"] });
-      toast.success("Brand created successfully");
+      queryClient.invalidateQueries({ queryKey: ["warehouses"] });
+      toast.success("Warehouse created successfully");
     },
     onError: (error) => {
       const code = getReadableErrorCode(error);
-      const message = getErrorMessage(error, "Failed to create brand.");
+      const message = getErrorMessage(error, "Failed to create warehouse.");
       toast.error(code, { description: message });
     },
   });
 };
 
-export const useUpdateBrand = () => {
+export const useUpdateWarehouse = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -60,36 +60,36 @@ export const useUpdateBrand = () => {
       data,
     }: {
       id: string;
-      data: BrandFormValues;
+      data: WarehouseFormValues;
     }) => {
-      return updateBrand(id, data);
+      return updateWarehouse(id, data);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["brands"] });
-      toast.success("Brand updated successfully");
+      queryClient.invalidateQueries({ queryKey: ["warehouses"] });
+      toast.success("Warehouse updated successfully");
     },
     // onerror
     onError: (error) => {
       const code = getReadableErrorCode(error);
-      const message = getErrorMessage(error, "Failed to create brand.");
+      const message = getErrorMessage(error, "Failed to create warehouse.");
       toast.error(code, { description: message });
     },
   });
 };
 
 // ✅ Hook untuk menghapus kategori
-export const useDeleteBrand = () => {
+export const useDeleteWarehouse = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: deleteBrand,
+    mutationFn: deleteWarehouse,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["brands"] });
-      toast.success("Brand deleted successfully");
+      queryClient.invalidateQueries({ queryKey: ["warehouses"] });
+      toast.success("Warehouse deleted successfully");
     },
     onError: (error) => {
       const code = getReadableErrorCode(error);
-      const message = getErrorMessage(error, "Failed to delete brand.");
+      const message = getErrorMessage(error, "Failed to delete warehouse.");
       toast.error(code, { description: message });
     },
   });

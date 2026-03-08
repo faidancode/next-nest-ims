@@ -22,7 +22,7 @@ import { Input } from "@/components/ui/input";
 import { getErrorMessage } from "@/lib/api/errors";
 import { apiRequest, unwrapEnvelope } from "@/lib/api/fetcher";
 import { cn } from "@/lib/utils";
-import { LoginFormValues } from "@/lib/validations/auth-schema";
+import { LoginFormValues } from "@/lib/validations/auth.schema";
 import { AuthMeData, AuthUser, LoginResponse } from "@/types";
 
 type LoginFormProps = React.ComponentProps<"div"> & {

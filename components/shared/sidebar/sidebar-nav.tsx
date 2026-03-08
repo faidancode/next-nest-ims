@@ -48,8 +48,8 @@ export function SidebarNav() {
               className={cn(
                 "relative h-12 px-4 rounded-xl transition-all duration-300 group",
                 active
-                  ? "bg-slate-900 text-white shadow-lg shadow-slate-200"
-                  : "hover:bg-slate-100 text-slate-500 hover:text-slate-900",
+                  ? "bg-slate-900 hover:bg-primary text-white hover:text-white"
+                  : "hover:bg-slate-200 text-slate-500 hover:text-slate-900",
               )}
             >
               <a href={item.url} className="flex items-center gap-3 w-full">
@@ -57,7 +57,7 @@ export function SidebarNav() {
                   className={cn(
                     "p-1.5 rounded-lg transition-colors",
                     active
-                      ? "bg-white/10 text-primary"
+                      ? "bg-amber-600 text-primary"
                       : "text-slate-400 group-hover:text-slate-900",
                   )}
                 >

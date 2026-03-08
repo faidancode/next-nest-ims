@@ -1,45 +1,45 @@
 "use client";
 
-import { BrandFormValues } from "@/lib/validations/warehouse-schema";
+import { WarehouseFormValues } from "@/lib/validations/warehouse.schema";
 import { create } from "zustand";
 
 type Mode = "create" | "edit";
 
-interface BrandEditPayload {
+interface WarehouseEditPayload {
   id: string;
   name: string;
-  slug: string;
-  imageUrl: string;
+  location: string;
+  isActive: boolean;
 }
 
-interface BrandSheetState {
+interface WarehouseSheetState {
   open: boolean;
   mode: Mode;
   editingId?: string;
-  defaultValues: Partial<BrandFormValues>;
+  defaultValues: Partial<WarehouseFormValues>;
   openCreate: () => void;
-  openEdit: (payload: BrandEditPayload) => void;
+  openEdit: (payload: WarehouseEditPayload) => void;
   close: () => void;
 }
 
-export const useBrandSheet = create<BrandSheetState>((set) => ({
+export const useWarehouseSheet = create<WarehouseSheetState>((set) => ({
   open: false,
   mode: "create",
   editingId: undefined,
-  defaultValues: { name: "", slug: "", imageUrl: "" },
+  defaultValues: { name: "", location: "", isActive: true },
   openCreate: () =>
     set({
       open: true,
       mode: "create",
       editingId: undefined,
-      defaultValues: { name: "", slug: "", imageUrl: "" },
+      defaultValues: { name: "", location: "", isActive: true },
     }),
-  openEdit: ({ id, name, slug, imageUrl }) =>
+  openEdit: ({ id, name, location, isActive }) =>
     set({
       open: true,
       mode: "edit",
       editingId: id,
-      defaultValues: { name, slug, imageUrl },
+      defaultValues: { name, location, isActive },
     }),
   close: () => set({ open: false }),
 }));

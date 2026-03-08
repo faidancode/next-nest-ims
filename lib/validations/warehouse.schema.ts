@@ -1,4 +1,3 @@
-// src/schemas/warehouseSchema.ts
 import { z } from "zod";
 
 export const warehouseSchema = z.object({
@@ -6,8 +5,12 @@ export const warehouseSchema = z.object({
     .string()
     .min(3, "Name required")
     .max(255, "Name cannot exceed 255 characters"),
-  slug: z.string().optional(),
-  imageUrl: z.url("Image must be a valid URL").optional().or(z.literal("")),
+  location: z
+    .string()
+    .max(500, "Location cannot exceed 500 characters")
+    .optional()
+    .or(z.literal("")),
+  isActive: z.boolean().default(true),
   createdAt: z.date().optional().nullable(),
   updatedAt: z.date().optional().nullable(),
   deletedAt: z.date().optional().nullable(),

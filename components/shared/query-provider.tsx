@@ -28,6 +28,7 @@ export default function QueryProvider({
     markSessionExpired,
     isLoggingOut,
     setLoggingOut,
+    accessToken,
   } = useAuthStore();
 
   const [queryClient] = useState(
@@ -61,7 +62,15 @@ export default function QueryProvider({
     markSessionExpired();
 
     try {
-      await fetch("/api/auth/logout", { method: "POST" });
+      const headers = new Headers();
+      if (accessToken) {
+        headers.set("Authorization", `Bearer ${accessToken}`);
+      }
+
+      await fetch("/api/auth/logout", {
+        method: "POST",
+        headers,
+      });
     } catch {
       // ignore
     } finally {
@@ -81,7 +90,7 @@ export default function QueryProvider({
         handleSessionExpired();
       }
     });
-  }, [queryClient, isSessionExpired]);
+  }, [queryClient, isSessionExpired, accessToken]);
 
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

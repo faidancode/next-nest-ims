@@ -2,18 +2,18 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useBrands, useDeleteBrand } from "@/hooks/use-warehouse";
-import { useBrandSheet } from "@/hooks/use-warehouse-sheet";
+import { useWarehouses, useDeleteWarehouse } from "@/hooks/use-warehouse";
+import { useWarehouseSheet } from "@/hooks/use-warehouse-sheet";
 import { PlusCircle } from "lucide-react";
 import { useState } from "react";
 import { useDebounce } from "use-debounce";
-import BrandSheet from "./sheet";
+import WarehouseSheet from "./sheet";
 import { columns } from "./columns";
 import SkeletonTable from "@/components/shared/table/skeleton-table";
 import { DataTable } from "@/components/shared/table/data-table";
 import AppHeader from "@/components/shared/app-header";
 
-function BrandPage() {
+function WarehousePage() {
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebounce(search, 300); // 300ms delay
   const [page, setPage] = useState(1);
@@ -21,18 +21,19 @@ function BrandPage() {
   const [sort, setSort] = useState("createdAt:desc"); // default
 
   // Fetch data dengan pagination & search
-  const { data, isLoading, error } = useBrands(
+  const { data, isLoading, error } = useWarehouses(
     page,
     limit,
     debouncedSearch,
     sort,
   );
+  console.log({ data });
 
   const tableData = data?.data ?? [];
   const totalPages = data?.meta?.totalPages ?? 1;
 
-  const deleteMutation = useDeleteBrand();
-  const { openCreate, openEdit } = useBrandSheet();
+  const deleteMutation = useDeleteWarehouse();
+  const { openCreate, openEdit } = useWarehouseSheet();
 
   const handleDelete = (id: string) => {
     deleteMutation.mutate(id);
@@ -42,7 +43,7 @@ function BrandPage() {
 
   return (
     <>
-      <AppHeader title="Brands" />
+      <AppHeader title="Warehouses" />
       <div className="container pt-2">
         <div className="flex justify-between items-center mb-4 mt-6">
           <Input
@@ -53,7 +54,7 @@ function BrandPage() {
             className="bg-white p-2 border rounded-lg w-32"
           />
           <Button onClick={openCreate}>
-            <PlusCircle /> Add Brand
+            <PlusCircle /> Add Warehouse
           </Button>
         </div>
         {isLoading ? (
@@ -62,12 +63,12 @@ function BrandPage() {
           <div>
             <DataTable
               key={`${page}-${limit}`}
-              columns={columns(handleDelete, (brand) => {
+              columns={columns(handleDelete, (warehouse) => {
                 openEdit({
-                  id: brand.id,
-                  name: brand.name,
-                  slug: brand.slug ?? "",
-                  imageUrl: brand.imageUrl ?? "",
+                  id: warehouse.id,
+                  name: warehouse.name,
+                  location: warehouse.location ?? "",
+                  isActive: warehouse.isActive ?? warehouse.isActive ?? true,
                 });
               })}
               data={tableData}
@@ -81,10 +82,10 @@ function BrandPage() {
             />
           </div>
         )}
-        <BrandSheet />
+        <WarehouseSheet />
       </div>
     </>
   );
 }
 
-export default BrandPage;
+export default WarehousePage;

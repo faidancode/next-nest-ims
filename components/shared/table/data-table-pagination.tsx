@@ -43,7 +43,7 @@ export function DataTablePagination<TData>({
       <div className="flex items-center gap-6">
         <div className="flex items-center gap-3">
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-            Limit_Rows
+            Limit
           </p>
           <Select
             value={String(limit)}
@@ -70,10 +70,6 @@ export function DataTablePagination<TData>({
         </div>
 
         <div className="h-8 w-px bg-slate-100 hidden sm:block" />
-
-        <p className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest hidden sm:block">
-          Index_Range: <span className="text-slate-900">{totalPages} Pages</span>
-        </p>
       </div>
 
       <div className="flex items-center gap-2">
@@ -100,7 +96,9 @@ export function DataTablePagination<TData>({
 
           {/* Tactical Page Input Area */}
           <div className="flex items-center px-4 gap-2 bg-slate-50 border-x-2 border-slate-300 h-8">
-            <span className="text-[9px] font-black text-slate-400 uppercase tracking-tighter">Page</span>
+            <span className="text-[9px] font-black text-slate-400 uppercase tracking-tighter">
+              Page
+            </span>
             <div className="relative">
               <input
                 type="number"

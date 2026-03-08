@@ -12,6 +12,7 @@ import SkeletonTable from "@/components/shared/table/skeleton-table";
 import { DataTable } from "@/components/shared/table/data-table";
 import AppHeader from "@/components/shared/app-header";
 import { CustomerSheet } from "./sheet";
+import AddButton from "@/components/shared/add-button";
 
 function CustomerPage() {
   const [search, setSearch] = useState("");
@@ -63,13 +64,7 @@ function CustomerPage() {
             />
           </div>
 
-          <Button
-            onClick={openCreate}
-            className="h-11 px-6 rounded-none bg-primary hover:bg-slate-900 text-white font-black text-[10px] uppercase tracking-[0.2em] shadow-[6px_6px_0px_rgba(249,115,22,0.2)] hover:shadow-[6px_6px_0px_rgba(15,23,42,0.2)] transition-all active:translate-y-0.5 active:translate-x-0.5"
-          >
-            <PlusCircle size={16} className="mr-2 stroke-[3px]" />
-            Add New
-          </Button>
+          <AddButton onClick={openCreate} />
         </div>
 
         {/* --- DATA DISPLAY AREA --- */}

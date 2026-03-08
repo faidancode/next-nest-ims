@@ -38,7 +38,7 @@ export function WarehouseSheet() {
       isActive: true,
       createdAt: null,
       updatedAt: null,
-      deletedAt: null
+      deletedAt: null,
     },
   });
 
@@ -113,7 +113,7 @@ export function WarehouseSheet() {
       <SheetContent className="w-full sm:max-w-md bg-white border-l border-orange-500/30 text-slate-600 p-0 overflow-hidden">
         {/* Decorative Garage Grid Background */}
 
-        <SheetHeader className="p-8 bg-linear-to-b from-orange-500/10 to-transparent">
+        <SheetHeader className="px-8 py-4 bg-linear-to-b from-orange-500/10 to-transparent">
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2 bg-orange-600 rounded-tr-xl rounded-bl-xl shadow-[0_0_15px_rgba(249,115,22,0.4)]">
               <Warehouse className="text-black" size={24} />
@@ -122,14 +122,17 @@ export function WarehouseSheet() {
               {isEditMode ? "Update Warehouse" : "Deploy Warehouse"}
             </SheetTitle>
           </div>
-          <p className="text-xs text-orange-600 font-mono tracking-widest uppercase">Automotive Logistics Systems v2.0</p>
         </SheetHeader>
 
-        <form className="px-8 py-4 space-y-6 relative" onSubmit={form.handleSubmit(onSubmit)}>
+        <form
+          className="px-8 py-4 space-y-6 relative"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
           <AnimatePresence>
             {submitError && (
               <motion.div
-                initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
                 className="p-3 bg-red-950/30 border-l-4 border-red-500 text-red-400 text-xs font-mono"
               >
                 ERROR_CODE: {submitError}
@@ -139,7 +142,10 @@ export function WarehouseSheet() {
 
           {/* Input Name */}
           <div className="space-y-2 group">
-            <Label htmlFor="name" className="text-[10px] uppercase tracking-[0.2em] text-slate-600 group-focus-within:text-orange-400 transition-colors">
+            <Label
+              htmlFor="name"
+              className="text-[10px] uppercase tracking-[0.2em] text-slate-600 group-focus-within:text-orange-400 transition-colors"
+            >
               Warehouse Name
             </Label>
             <div className="relative">
@@ -149,14 +155,24 @@ export function WarehouseSheet() {
                 className=" border-slate-200 focus:border-orange-500/50 focus:ring-1 focus:ring-orange-500/20 rounded-none h-12 transition-all"
                 placeholder="e.g. CENTRAL_PARTS_A1"
               />
-              <Warehouse className="absolute right-3 top-3 text-slate-500" size={18} />
+              <Warehouse
+                className="absolute right-3 top-3 text-slate-500"
+                size={18}
+              />
             </div>
-            {errors.name && <p className="text-[10px] font-mono text-red-500 mt-1">{errors.name.message}</p>}
+            {errors.name && (
+              <p className="text-[10px] font-mono text-red-500 mt-1">
+                {errors.name.message}
+              </p>
+            )}
           </div>
 
           {/* Input Location */}
           <div className="space-y-2 group">
-            <Label htmlFor="location" className="text-[10px] uppercase tracking-[0.2em] text-slate-600 group-focus-within:text-orange-400 transition-colors">
+            <Label
+              htmlFor="location"
+              className="text-[10px] uppercase tracking-[0.2em] text-slate-600 group-focus-within:text-orange-400 transition-colors"
+            >
               Geolocation / Address
             </Label>
             <div className="relative">
@@ -166,7 +182,10 @@ export function WarehouseSheet() {
                 className=" border-slate-200 focus:border-orange-500/50 rounded-none h-12 transition-all"
                 placeholder="Industrial Zone Section C"
               />
-              <MapPin className="absolute right-3 top-3 text-slate-500" size={18} />
+              <MapPin
+                className="absolute right-3 top-3 text-slate-500"
+                size={18}
+              />
             </div>
           </div>
 
@@ -174,10 +193,17 @@ export function WarehouseSheet() {
           <div className="flex items-center justify-between border border-slate-200 p-4 relative overflow-hidden">
             <div className="z-10">
               <p className="text-sm font-bold tracking-tight text-slate-500 flex items-center gap-2">
-                <Power size={14} className={watch("isActive") ? "text-green-500" : "text-slate-500"} />
+                <Power
+                  size={14}
+                  className={
+                    watch("isActive") ? "text-green-500" : "text-slate-500"
+                  }
+                />
                 OPERATIONAL STATUS
               </p>
-              <p className="text-[10px] text-slate-500 font-mono">Toggle availability in supply chain</p>
+              <p className="text-[10px] text-slate-500 font-mono">
+                Toggle availability in supply chain
+              </p>
             </div>
             <Switch
               checked={watch("isActive")}
@@ -202,7 +228,13 @@ export function WarehouseSheet() {
               disabled={isSubmitting}
               className="flex-1 rounded-none bg-orange-600 hover:bg-orange-500 text-black font-black uppercase tracking-widest text-[10px] shadow-[0_4px_14px_0_rgba(249,115,22,0.39)] transition-all active:scale-95"
             >
-              {isSubmitting ? <Loader2 className="animate-spin" size={16} /> : isEditMode ? "Update" : "Create"}
+              {isSubmitting ? (
+                <Loader2 className="animate-spin" size={16} />
+              ) : isEditMode ? (
+                "Update"
+              ) : (
+                "Create"
+              )}
             </Button>
           </div>
         </SheetFooter>

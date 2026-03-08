@@ -125,9 +125,6 @@ export function CustomerSheet() {
               {isEditMode ? "Update Partner" : "Register Customer"}
             </SheetTitle>
           </div>
-          <p className="text-xs text-orange-600 font-mono tracking-widest uppercase">
-            Supply Chain Node v2.0
-          </p>
         </SheetHeader>
 
         <form

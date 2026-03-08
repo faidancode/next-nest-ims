@@ -2,8 +2,8 @@ import { Part } from "@/types/part.type";
 import { apiRequest, buildQueryString, unwrapEnvelope } from "./fetcher";
 import { PartFormValues } from "../validations/part.schema";
 
-export async function getParts(page: number, limit: number, search: string) {
-    const query = buildQueryString({ page, limit, search });
+export async function getParts(page: number, limit: number, search: string, sort: string) {
+    const query = buildQueryString({ page, limit, search, sort });
     const envelope = await apiRequest<Part[]>(`/parts?${query}`);
     return { data: unwrapEnvelope(envelope, "Failed to fetch Parts"), meta: envelope.meta };
 }

@@ -2,8 +2,8 @@ import { Customer } from "@/types/customer.type";
 import { apiRequest, buildQueryString, unwrapEnvelope } from "./fetcher";
 import { CustomerFormValues } from "../validations/customer.schema";
 
-export async function getCustomers(page: number, limit: number, search: string) {
-    const query = buildQueryString({ page, limit, search });
+export async function getCustomers(page: number, limit: number, search: string, sort: string) {
+    const query = buildQueryString({ page, limit, search, sort });
     const envelope = await apiRequest<Customer[]>(`/customers?${query}`);
     return { data: unwrapEnvelope(envelope, "Failed to fetch Customers"), meta: envelope.meta };
 }

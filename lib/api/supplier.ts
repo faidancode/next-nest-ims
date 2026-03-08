@@ -2,8 +2,8 @@ import { Supplier } from "@/types/supplier.type";
 import { apiRequest, buildQueryString, unwrapEnvelope } from "./fetcher";
 import { SupplierFormValues } from "../validations/supplier.schema";
 
-export async function getSuppliers(page: number, limit: number, search: string) {
-    const query = buildQueryString({ page, limit, search });
+export async function getSuppliers(page: number, limit: number, search: string, sort: string) {
+    const query = buildQueryString({ page, limit, search, sort });
     const envelope = await apiRequest<Supplier[]>(`/suppliers?${query}`);
     return { data: unwrapEnvelope(envelope, "Failed to fetch Suppliers"), meta: envelope.meta };
 }

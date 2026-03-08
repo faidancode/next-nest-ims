@@ -10,7 +10,7 @@ export const warehouseSchema = z.object({
     .max(500, "Location cannot exceed 500 characters")
     .optional()
     .or(z.literal("")),
-  isActive: z.boolean().default(true),
+  isActive: z.boolean(),
   createdAt: z.date().optional().nullable(),
   updatedAt: z.date().optional().nullable(),
   deletedAt: z.date().optional().nullable(),

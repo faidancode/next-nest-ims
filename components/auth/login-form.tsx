@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import { Eye, EyeOff, Loader2, ShieldAlert, UserCheck } from "lucide-react";
+import { ArrowRight, Eye, EyeOff, Loader2, ShieldAlert, UserCheck } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import * as React from "react";
@@ -138,105 +138,118 @@ export function LoginForm({
   return (
     <div
       className={cn(
-        "min-h-[80vh] flex items-center justify-center p-4",
+        "min-h-screen flex items-center justify-center p-4 bg-[#f8f9fa] relative overflow-hidden",
         className,
       )}
       {...props}
     >
-      <div className="w-full max-w-100 space-y-8">
-        <div className="flex flex-col items-center gap-2">
-          <div className="h-12 w-12 bg-primary rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20">
+      {/* Decorative Background Elements - Blueprint Grid */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{ backgroundImage: `linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)`, backgroundSize: '40px 40px' }}
+      />
+
+      <div className="w-full max-w-[400px] space-y-6 relative z-10">
+        <div className="flex flex-col items-center gap-4">
+          {/* Logo with Automotive Hexagon/Industrial Shield shape */}
+          <div className="h-16 w-16 bg-orange-600 flex items-center justify-center shadow-[0_10px_20px_rgba(234,88,12,0.3)] clip-path-hexagon relative">
+            <div className="absolute inset-0 border-2 border-white/20 scale-90" />
             <Image
               src="/logo.svg"
               alt="logo"
-              height={28}
-              width={28}
+              height={32}
+              width={32}
               className="brightness-0 invert"
             />
           </div>
-          <div className="text-center mt-2">
-            <h1 className="text-2xl font-black tracking-tighter text-slate-900 flex items-center justify-center gap-1">
-              Nest<span className="text-primary italic">IMS</span>
+          <div className="text-center">
+            <h1 className="text-3xl font-black tracking-widest  text-slate-900 uppercase italic">
+              Nest<span className="text-orange-600 not-italic ml-2">IMS</span>
             </h1>
+            <div className="h-1 w-12 bg-orange-600 mx-auto mt-1" />
           </div>
         </div>
 
-        <Card className="border-slate-200/80 shadow-2xl shadow-slate-200/50 rounded-3xl overflow-hidden">
-          <CardHeader className="pt-8 pb-4 px-8 text-center">
-            <CardTitle className="text-xl font-bold tracking-tight text-slate-800">
-              Welcome Back
+        <Card className="border-none shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-none relative overflow-hidden bg-white">
+          {/* Industrial Accent Bar */}
+          <div className="absolute top-0 left-0 w-full h-1.5 bg-orange-600" />
+
+          <CardHeader className="pt-10 pb-6 px-10">
+            <CardTitle className="text-xl font-black tracking-tighter text-slate-900 uppercase italic">
+              Terminal Login
             </CardTitle>
-            <CardDescription className="text-xs font-medium text-slate-500">
-              Authorized personnel only. Please enter your credentials.
+            <CardDescription className="text-[10px] font-mono uppercase tracking-widest text-slate-400 mt-2">
+              System Authentication Required // Area 51
             </CardDescription>
           </CardHeader>
 
-          <CardContent className="p-8 pt-0">
+          <CardContent className="px-10 pb-10">
             {loginError && (
-              <div className="flex items-center gap-3 p-3 mb-6 bg-red-50 border border-red-100 rounded-2xl text-[11px] font-bold text-red-600 animate-in fade-in slide-in-from-top-1">
-                <ShieldAlert size={18} className="shrink-0" />
-                {loginError}
+              <div className="flex items-center gap-3 p-3 mb-6 bg-red-50 border-l-4 border-red-500 text-[10px] font-mono font-bold text-red-600 animate-in slide-in-from-left-2">
+                <ShieldAlert size={16} className="shrink-0" />
+                AUTH_FAILURE: {loginError}
               </div>
             )}
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-              <div className="space-y-4">
-                <div className="space-y-1.5">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              <div className="space-y-5">
+                <div className="space-y-2 group">
                   <FieldLabel
                     htmlFor="email"
-                    className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1"
+                    className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 group-focus-within:text-orange-600 transition-colors"
                   >
-                    Email Address
+                    Operator ID (Email)
                   </FieldLabel>
-                  <div className="relative group">
+                  <div className="relative">
                     <Input
                       id="email"
                       type="email"
-                      placeholder="admin@example.com"
-                      className="h-12 rounded-xl border-slate-200 bg-slate-50/50 px-4 focus:bg-white transition-all focus:ring-2 focus:ring-primary/20"
+                      placeholder="admin@nestims.com"
+                      className="h-12 rounded-none border-slate-200 bg-white px-4 focus:border-orange-600 transition-all focus:ring-0 text-sm font-medium"
                       {...register("email", { required: true })}
                     />
+                    <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-600 transition-all group-focus-within:w-full" />
                   </div>
                 </div>
 
-                <div className="space-y-1.5">
-                  <div className="flex items-center justify-between ml-1">
-                    <FieldLabel
-                      htmlFor="password"
-                      className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400"
-                    >
-                      Password
-                    </FieldLabel>
-                  </div>
-                  <div className="relative group">
+                <div className="space-y-2 group">
+                  <FieldLabel
+                    htmlFor="password"
+                    className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 group-focus-within:text-orange-600 transition-colors"
+                  >
+                    Security Access Key
+                  </FieldLabel>
+                  <div className="relative">
                     <Input
                       id="password"
                       type={showPassword ? "text" : "password"}
-                      placeholder="********"
-                      className="h-12 rounded-xl border-slate-200 bg-slate-50/50 px-4 focus:bg-white transition-all focus:ring-2 focus:ring-primary/20"
+                      placeholder="••••••••"
+                      className="h-12 rounded-none border-slate-200 bg-white px-4 focus:border-orange-600 transition-all focus:ring-0 text-sm"
                       {...register("password", { required: true })}
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors p-1"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-orange-600 transition-colors p-1"
                     >
                       {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                     </button>
+                    <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-600 transition-all group-focus-within:w-full" />
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-3 pt-2">
+              <div className="space-y-4 pt-4">
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full h-12 rounded-xl bg-slate-900 hover:bg-primary text-white font-black text-[11px] uppercase tracking-[0.2em] transition-all shadow-xl shadow-slate-200 active:scale-[0.98]"
+                  className="w-full h-14 rounded-none bg-slate-900 hover:bg-orange-600 text-white font-black text-xs uppercase tracking-[0.25em] transition-all shadow-lg active:scale-[0.97] group"
                 >
                   {isLoading ? (
-                    <Loader2 className="animate-spin mr-2" size={16} />
+                    <Loader2 className="animate-spin" size={20} />
                   ) : (
-                    "Sign In to Dashboard"
+                    <span className="flex items-center gap-2">
+                      Initialize Session <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                    </span>
                   )}
                 </Button>
 
@@ -244,10 +257,8 @@ export function LoginForm({
                   <div className="absolute inset-0 flex items-center">
                     <span className="w-full border-t border-slate-100" />
                   </div>
-                  <div className="relative flex justify-center text-[10px] uppercase font-bold tracking-widest">
-                    <span className="bg-white px-3 text-slate-300">
-                      Quick Access
-                    </span>
+                  <div className="relative flex justify-center text-[9px] uppercase font-bold tracking-[0.3em]">
+                    <span className="bg-white px-4 text-slate-300">Override Mode</span>
                   </div>
                 </div>
 
@@ -256,19 +267,24 @@ export function LoginForm({
                   variant="outline"
                   disabled={isLoading}
                   onClick={handleGuestAdminLogin}
-                  className="w-full h-12 rounded-xl border-slate-200 bg-white hover:bg-slate-50 text-slate-600 font-bold text-[11px] uppercase tracking-[0.15em] flex items-center justify-center gap-2 transition-all"
+                  className="w-full h-12 rounded-none border-slate-200 bg-white hover:bg-slate-50 text-slate-600 font-bold text-[10px] uppercase tracking-[0.2em] flex items-center justify-center gap-2 transition-all"
                 >
-                  <UserCheck size={16} className="text-primary" />
-                  Login as Guest Admin
+                  <UserCheck size={14} className="text-orange-600" />
+                  Bypass as Guest Admin
                 </Button>
               </div>
             </form>
           </CardContent>
         </Card>
 
-        <p className="text-center text-[10px] font-medium text-slate-400 tracking-wide uppercase">
-          &copy; 2026 NestIMS Systems &bull; Secure Connection
-        </p>
+        <div className="flex flex-col items-center gap-1">
+          <p className="text-[10px] font-mono text-slate-400 tracking-tight">
+            System Status: <span className="text-green-500 animate-pulse">Online</span>
+          </p>
+          <p className="text-[9px] font-bold text-slate-400 tracking-[0.2em] uppercase">
+            &copy; 2026 NestIMS Automotive Logistics
+          </p>
+        </div>
       </div>
     </div>
   );

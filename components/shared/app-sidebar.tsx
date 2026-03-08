@@ -52,9 +52,7 @@ export function AppSidebar() {
       </SidebarContent>
 
       <SidebarFooter className="bg-white p-4 border-t border-slate-50">
-        <div className="bg-slate-50 rounded-[2rem] p-2">
-          <SidebarUser />
-        </div>
+        <SidebarUser />
       </SidebarFooter>
     </Sidebar>
   );

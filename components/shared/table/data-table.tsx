@@ -81,33 +81,25 @@ export function DataTable<TData, TValue>({
     },
   });
   return (
-    <div className="rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden transition-all duration-300">
+    <div className="rounded-none border-2 border-slate-900 bg-white shadow-[8px_8px_0px_rgba(0,0,0,0.05)] overflow-hidden">
       <div className="overflow-x-auto">
         <Table>
-          <TableHeader className="bg-slate-50/50">
+          <TableHeader className="bg-slate-900">
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="hover:bg-transparent border-slate-100">
+              <TableRow key={headerGroup.id} className="hover:bg-transparent border-none">
                 {headerGroup.headers.map((header) => (
                   <TableHead
                     key={header.id}
                     className={cn(
-                      "h-12 px-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 transition-colors",
-                      header.column.getCanSort() ? "cursor-pointer hover:text-primary" : "cursor-default"
+                      "h-10 px-4 font-black capitalize tracking-widest text-slate-200 border-r border-slate-800 last:border-none",
+                      header.column.getCanSort() ? "cursor-pointer hover:text-primary transition-colors" : "cursor-default"
                     )}
                     onClick={header.column.getToggleSortingHandler()}
                   >
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-between">
                       {flexRender(header.column.columnDef.header, header.getContext())}
                       {header.column.getCanSort() && (
-                        <div className="flex flex-col">
-                          {header.column.getIsSorted() === "asc" ? (
-                            <ArrowUp size={12} className="text-primary" />
-                          ) : header.column.getIsSorted() === "desc" ? (
-                            <ArrowDown size={12} className="text-primary" />
-                          ) : (
-                            <ArrowUpDown size={12} className="opacity-20" />
-                          )}
-                        </div>
+                        <ArrowUpDown size={10} className={header.column.getIsSorted() ? "text-primary" : "opacity-20"} />
                       )}
                     </div>
                   </TableHead>
@@ -120,11 +112,11 @@ export function DataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  className="group border-slate-50 hover:bg-slate-50/50 transition-colors"
+                  className="group border-b border-slate-100 hover:bg-orange-50/30 transition-colors"
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="px-4 py-3 text-xs font-medium text-slate-600">
+                    <TableCell key={cell.id} className="px-4 py-2.5  font-mono font-bold text-slate-700">
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
@@ -132,10 +124,12 @@ export function DataTable<TData, TValue>({
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-32 text-center">
-                  <div className="flex flex-col items-center justify-center text-slate-400 gap-2">
-                    <SearchX size={32} strokeWidth={1.5} />
-                    <p className="text-xs font-bold uppercase tracking-widest">No matching records found</p>
+                <TableCell colSpan={columns.length} className="h-40 text-center bg-slate-50/50">
+                  <div className="flex flex-col items-center justify-center text-slate-300 gap-3">
+                    <div className="p-4 rounded-none border-2 border-dashed border-slate-200">
+                      <SearchX size={32} strokeWidth={1} />
+                    </div>
+                    <p className="font-black uppercase tracking-[0.3em]">No_Data_In_Record</p>
                   </div>
                 </TableCell>
               </TableRow>

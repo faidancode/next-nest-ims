@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useWarehouses, useDeleteWarehouse } from "@/hooks/use-warehouse";
 import { useWarehouseSheet } from "@/hooks/use-warehouse-sheet";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, Search } from "lucide-react";
 import { useState } from "react";
 import { useDebounce } from "use-debounce";
 import WarehouseSheet from "./sheet";
@@ -44,44 +44,69 @@ function WarehousePage() {
   return (
     <>
       <AppHeader title="Warehouses" />
-      <div className="container pt-2">
-        <div className="flex justify-between items-center mb-4 mt-6">
-          <Input
-            type="text"
-            placeholder="Search..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="bg-white p-2 border rounded-lg w-32"
-          />
-          <Button onClick={openCreate}>
-            <PlusCircle /> Add Warehouse
-          </Button>
-        </div>
-        {isLoading ? (
-          <SkeletonTable />
-        ) : (
-          <div>
-            <DataTable
-              key={`${page}-${limit}`}
-              columns={columns(handleDelete, (warehouse) => {
-                openEdit({
-                  id: warehouse.id,
-                  name: warehouse.name,
-                  location: warehouse.location ?? "",
-                  isActive: warehouse.isActive ?? warehouse.isActive ?? true,
-                });
-              })}
-              data={tableData}
-              page={page}
-              setPage={setPage}
-              limit={limit}
-              setLimit={setLimit}
-              totalPages={totalPages}
-              sort={sort}
-              setSort={setSort}
+      <div className="flex-1 space-y-4 p-8 pt-6 bg-[#fbfcfd]">
+
+        {/* --- ACTION BAR: SEARCH & CREATE --- */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+          <div className="relative w-full max-w-sm group">
+            <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+              <Search size={14} className="text-slate-400 group-focus-within:text-primary transition-colors" />
+            </div>
+            <Input
+              type="text"
+              placeholder="Search..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="bg-white pl-10 h-11 border-2 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-slate-900 font-mono text-[11px] uppercase tracking-wider transition-all shadow-[4px_4px_0px_rgba(0,0,0,0.02)]"
             />
           </div>
-        )}
+
+          <Button
+            onClick={openCreate}
+            className="h-11 px-6 rounded-none bg-primary hover:bg-slate-900 text-white font-black text-[10px] uppercase tracking-[0.2em] shadow-[6px_6px_0px_rgba(249,115,22,0.2)] hover:shadow-[6px_6px_0px_rgba(15,23,42,0.2)] transition-all active:translate-y-0.5 active:translate-x-0.5"
+          >
+            <PlusCircle size={16} className="mr-2 stroke-[3px]" />
+            Add New
+          </Button>
+        </div>
+
+        {/* --- DATA DISPLAY AREA --- */}
+        <div className="relative">
+          {/* Decorative background element for industrial feel */}
+          <div className="absolute -top-6 -right-6 text-[60px] font-black text-slate-900/3 select-none pointer-events-none italic uppercase">
+            Inventory_v2
+          </div>
+
+          {isLoading ? (
+            <div className="border-2 border-slate-200 bg-white p-1">
+              <SkeletonTable />
+            </div>
+          ) : (
+            <div className="relative z-10">
+              <DataTable
+                key={`${page}-${limit}`}
+                columns={columns(handleDelete, (warehouse) => {
+                  openEdit({
+                    id: warehouse.id,
+                    name: warehouse.name,
+                    location: warehouse.location ?? "",
+                    isActive: warehouse.isActive ?? true,
+                  });
+                })}
+                data={tableData}
+                page={page}
+                setPage={setPage}
+                limit={limit}
+                setLimit={setLimit}
+                totalPages={totalPages}
+                sort={sort}
+                setSort={setSort}
+              />
+            </div>
+          )}
+        </div>
+
+        {/* --- MODAL/SHEET COMPONENTS --- */}
         <WarehouseSheet />
       </div>
     </>

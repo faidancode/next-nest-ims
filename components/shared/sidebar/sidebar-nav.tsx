@@ -1,25 +1,17 @@
 "use client";
 
-import { useAuthStore } from "@/app/stores/auth";
 import { usePathname } from "next/navigation";
-import { useMemo } from "react";
 
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import {
-  BadgeCheck,
-  ChartArea,
-  LayoutGrid,
-  ReceiptText,
-  ShieldUser,
-  TabletSmartphone,
-  Users,
-  Warehouse,
-} from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  ChartArea,
+  Warehouse
+} from "lucide-react";
 
 /* ------------------------------------------------------------------ */
 /* Config */
@@ -32,12 +24,11 @@ const SIDEBAR_ITEMS = [
 
 export function SidebarNav() {
   const pathname = usePathname();
-
   const isActive = (url: string) =>
     pathname === url || (pathname.startsWith(url) && url !== "/");
 
   return (
-    <SidebarMenu className="gap-1.5">
+    <SidebarMenu className="gap-2 px-2">
       {SIDEBAR_ITEMS.map((item) => {
         const active = isActive(item.url);
 
@@ -46,19 +37,17 @@ export function SidebarNav() {
             <SidebarMenuButton
               asChild
               className={cn(
-                "relative h-12 px-4 rounded-xl transition-all duration-300 group",
+                "relative h-11 px-3 rounded-none transition-all duration-200 group border-l-2",
                 active
-                  ? "bg-slate-900 hover:bg-primary text-white hover:text-white"
-                  : "hover:bg-slate-200 text-slate-500 hover:text-slate-900",
+                  ? "bg-orange-50/50 border-orange-600 text-slate-900 shadow-[sm]"
+                  : "bg-transparent border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-50",
               )}
             >
               <a href={item.url} className="flex items-center gap-3 w-full">
                 <div
                   className={cn(
-                    "p-1.5 rounded-lg transition-colors",
-                    active
-                      ? "bg-amber-600 text-primary"
-                      : "text-slate-400 group-hover:text-slate-900",
+                    "transition-transform duration-200",
+                    active ? "text-orange-600 scale-110" : "text-slate-400 group-hover:text-slate-600",
                   )}
                 >
                   <item.icon size={18} strokeWidth={active ? 2.5 : 2} />
@@ -66,15 +55,15 @@ export function SidebarNav() {
 
                 <span
                   className={cn(
-                    "text-sm font-bold tracking-tight transition-all",
-                    active ? "translate-x-0.5" : "group-hover:translate-x-0.5",
+                    "text-[11px] uppercase tracking-widest font-black transition-all",
+                    active ? "opacity-100" : "opacity-70 group-hover:opacity-100",
                   )}
                 >
                   {item.title}
                 </span>
 
                 {active && (
-                  <div className="absolute right-3 w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                  <div className="absolute right-0 top-0 h-full w-[4px] bg-orange-600/10 animate-pulse" />
                 )}
               </a>
             </SidebarMenuButton>

@@ -10,39 +10,35 @@ type props = {
 
 function AppHeader({ title }: props) {
   return (
-    <header className="sticky top-0 z-30 flex h-16 shrink-0 items-center justify-between px-6 bg-white/80 backdrop-blur-md border-b border-slate-100 rounded-2xl shadow-sm shadow-slate-200/20 transition-all duration-300">
+    <header className="sticky top-0 z-30 flex h-14 shrink-0 items-center justify-between px-6 bg-white border-b-2 border-slate-900 transition-all duration-300">
       <div className="flex items-center gap-4">
-        {/* Sidebar Trigger dengan Hover Effect yang Halus */}
-        <div className="p-1 rounded-xl hover:bg-slate-100 transition-colors">
-          <SidebarTrigger className="-ml-1 text-slate-500 hover:text-slate-900" />
+        {/* Sidebar Trigger - Industrial Style */}
+        <div className="flex items-center justify-center pr-4 h-14">
+          <SidebarTrigger className="text-slate-900 hover:text-primary transition-colors scale-110" />
         </div>
 
-        {/* Separator yang Lebih Minimalis */}
-        <div className="h-4 w-1px bg-slate-200 rotate-15" />
-
-        {/* Breadcrumb / Title Area */}
+        {/* Title Area - Precision Labeling */}
         <div className="flex flex-col">
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary/60 leading-none mb-1">
-            Dashboard
-          </p>
-          <h2 className="font-black text-sm tracking-tight text-slate-900 uppercase">
+          <h2 className="font-black text-sm tracking-tighter text-slate-900 uppercase mt-1">
             {title}
           </h2>
         </div>
       </div>
 
-      {/* Tambahkan Area Action atau Status di sisi kanan jika perlu */}
-      <div className="flex items-center gap-3">
-        <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 rounded-full border border-slate-100">
-          <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-[9px] font-black uppercase tracking-widest text-slate-500">
-            System Live
-          </span>
+      <div className="flex items-center gap-4">
+        {/* Status Indicator - Diagnostic Style */}
+        <div className="hidden sm:flex items-center gap-3 px-4 py-1 border-l border-slate-100 h-14">
+          <div className="flex flex-col items-end">
+            <span className="text-[8px] font-mono text-slate-400 leading-none uppercase">Status</span>
+            <span className="text-[10px] font-black text-emerald-600 uppercase tracking-widest leading-none mt-1">Live_Feed</span>
+          </div>
+          <div className="h-2 w-2 rounded-full bg-emerald-500 animate-[pulse_1s_ease-in-out_infinite] shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
         </div>
 
-        {/* Placeholder untuk Bell Notification atau Search jika nanti ada */}
-        <button className="h-9 w-9 flex items-center justify-center rounded-xl text-slate-400 hover:bg-slate-100 hover:text-slate-900 transition-all">
+        {/* Action Button - Square Tech */}
+        <button className="h-10 w-10 flex items-center justify-center rounded-none border border-slate-200 text-slate-900 hover:bg-slate-900 hover:text-white transition-all relative group">
           <Bell size={18} />
+          <span className="absolute top-0 right-0 h-2 w-2 bg-primary border border-white" />
         </button>
       </div>
     </header>

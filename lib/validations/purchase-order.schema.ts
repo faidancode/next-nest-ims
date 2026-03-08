@@ -16,7 +16,7 @@ export const purchaseOrderSchema = z.object({
   orderDate: z.string().optional(),
   expectedDate: z.string().optional().or(z.literal("")),
   notes: z.string().optional().or(z.literal("")),
-  approvedBy: z.string().uuid().optional().or(z.literal("")),
+  approvedBy: z.uuid().optional().or(z.literal("")),
   items: z.array(purchaseOrderItemSchema).default([]),
 });
 

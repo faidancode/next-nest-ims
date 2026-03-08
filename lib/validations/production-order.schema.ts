@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const productionOrderSchema = z.object({
-    id: z.string().uuid().optional(),
+    id: z.uuid().optional(),
 
     poNumber: z
         .string()
@@ -41,10 +41,10 @@ export const productionOrderSchema = z.object({
     updatedAt: z.date().optional().nullable(),
     deletedAt: z.date().optional().nullable(),
 
-    createdBy: z.string().uuid().optional().nullable(),
-    updatedBy: z.string().uuid().optional().nullable(),
-    deletedBy: z.string().uuid().optional().nullable(),
-    approvedBy: z.string().uuid().optional().nullable(),
+    createdBy: z.uuid().optional().nullable(),
+    updatedBy: z.uuid().optional().nullable(),
+    deletedBy: z.uuid().optional().nullable(),
+    approvedBy: z.uuid().optional().nullable(),
 });
 
 export type ProductionOrderFormValues = z.infer<typeof productionOrderSchema>;

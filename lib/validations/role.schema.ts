@@ -21,9 +21,9 @@ export const roleSchema = z.object({
     updatedAt: z.date().optional().nullable(),
     deletedAt: z.date().optional().nullable(),
 
-    createdBy: z.string().uuid().optional().nullable(),
-    updatedBy: z.string().uuid().optional().nullable(),
-    deletedBy: z.string().uuid().optional().nullable(),
+    createdBy: z.uuid().optional().nullable(),
+    updatedBy: z.uuid().optional().nullable(),
+    deletedBy: z.uuid().optional().nullable(),
 });
 
 export type RoleFormValues = z.infer<typeof roleSchema>;

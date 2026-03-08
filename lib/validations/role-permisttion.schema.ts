@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const rolePermissionSchema = z.object({
-    id: z.string().uuid().optional(),
+    id: z.uuid().optional(),
 
     roleId: z
         .string()
@@ -16,9 +16,9 @@ export const rolePermissionSchema = z.object({
     updatedAt: z.date().optional().nullable(),
     deletedAt: z.date().optional().nullable(),
 
-    createdBy: z.string().uuid().optional().nullable(),
-    updatedBy: z.string().uuid().optional().nullable(),
-    deletedBy: z.string().uuid().optional().nullable(),
+    createdBy: z.uuid().optional().nullable(),
+    updatedBy: z.uuid().optional().nullable(),
+    deletedBy: z.uuid().optional().nullable(),
 });
 
 export type RolePermissionFormValues = z.infer<typeof rolePermissionSchema>;

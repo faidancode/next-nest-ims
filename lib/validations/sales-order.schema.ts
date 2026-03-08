@@ -2,8 +2,8 @@ import { z } from "zod";
 
 // Schema untuk item di dalam Sales Order
 export const salesOrderItemSchema = z.object({
-    id: z.string().uuid().optional(),
-    salesOrderId: z.string().uuid().optional(),
+    id: z.uuid().optional(),
+    salesOrderId: z.uuid().optional(),
     partId: z
         .string()
         .uuid("Invalid part ID"),
@@ -20,14 +20,14 @@ export const salesOrderItemSchema = z.object({
     createdAt: z.date().optional().nullable(),
     updatedAt: z.date().optional().nullable(),
     deletedAt: z.date().optional().nullable(),
-    createdBy: z.string().uuid().optional().nullable(),
-    updatedBy: z.string().uuid().optional().nullable(),
-    deletedBy: z.string().uuid().optional().nullable(),
+    createdBy: z.uuid().optional().nullable(),
+    updatedBy: z.uuid().optional().nullable(),
+    deletedBy: z.uuid().optional().nullable(),
 });
 
 // Schema Utama Sales Order
 export const salesOrderSchema = z.object({
-    id: z.string().uuid().optional(),
+    id: z.uuid().optional(),
 
     soNumber: z
         .string()
@@ -62,10 +62,10 @@ export const salesOrderSchema = z.object({
     createdAt: z.date().optional().nullable(),
     updatedAt: z.date().optional().nullable(),
     deletedAt: z.date().optional().nullable(),
-    createdBy: z.string().uuid().optional().nullable(),
-    updatedBy: z.string().uuid().optional().nullable(),
-    deletedBy: z.string().uuid().optional().nullable(),
-    approvedBy: z.string().uuid().optional().nullable(),
+    createdBy: z.uuid().optional().nullable(),
+    updatedBy: z.uuid().optional().nullable(),
+    deletedBy: z.uuid().optional().nullable(),
+    approvedBy: z.uuid().optional().nullable(),
 });
 
 export type SalesOrderFormValues = z.infer<typeof salesOrderSchema>;

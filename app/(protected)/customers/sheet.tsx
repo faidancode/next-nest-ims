@@ -136,7 +136,7 @@ export function CustomerSheet() {
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="p-3 bg-red-950/30 border-l-4 border-red-500 text-red-400 text-xs font-mono"
+                className="p-3 bg-red-100 border-l-4 border-red-500 text-red-400 text-xs font-mono"
               >
                 ERR_NODE_FAILURE: {submitError}
               </motion.div>

@@ -1,67 +1,62 @@
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
-// 1. Definisi Tipe Status
-export type OrderStatus =
-    | "PENDING"
-    | "PAID"
-    | "PROCESSING"
-    | "SHIPPED"
-    | "DELIVERED"
-    | "COMPLETED"
-    | "CANCELLED";
-
-// 2. Mapping Gaya (Style) untuk setiap status
-const STATUS_CONFIG: Record<OrderStatus, { label: string; className: string }> = {
-    PENDING: {
-        label: "Pending",
-        className: "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-100",
-    },
-    PAID: {
-        label: "Paid",
-        className: "bg-blue-100 text-blue-700 border-blue-200 hover:bg-blue-100",
-    },
-    PROCESSING: {
-        label: "Processing",
-        className: "bg-amber-100 text-amber-700 border-amber-200 hover:bg-amber-100",
-    },
-    SHIPPED: {
-        label: "Shipped",
-        className: "bg-indigo-100 text-indigo-700 border-indigo-200 hover:bg-indigo-100",
-    },
-    DELIVERED: {
-        label: "Delivered",
-        className: "bg-emerald-100 text-emerald-700 border-emerald-200 hover:bg-emerald-100",
-    },
-    COMPLETED: {
-        label: "Completed",
-        className: "bg-green-100 text-green-700 border-green-200 hover:bg-green-100",
-    },
-    CANCELLED: {
-        label: "Cancelled",
-        className: "bg-red-100 text-red-700 border-red-200 hover:bg-red- red-100",
-    },
-};
+// 1. Definisikan tipe status yang didukung
+export type GlobalStatus =
+  | "ACTIVE"
+  | "COMPLETE"
+  | "RECEIVED"
+  | "SUCCESS" // Green
+  | "INACTIVE"
+  | "CANCEL"
+  | "REJECTED"
+  | "DELETED" // Red
+  | "DRAFT"
+  | "PENDING"
+  | "WAITING" // Slate/Amber
+  | string;
 
 interface StatusBadgeProps {
-    status: string | OrderStatus;
-    className?: string;
+  status: GlobalStatus;
+  className?: string;
 }
 
 export function StatusBadge({ status, className }: StatusBadgeProps) {
-    // Normalisasi status ke uppercase agar cocok dengan key
-    const upperStatus = status?.toUpperCase() as OrderStatus;
-    const config = STATUS_CONFIG[upperStatus] || {
-        label: status,
-        className: "bg-gray-100 text-gray-600",
-    };
+  const s = status?.toUpperCase();
 
-    return (
-        <Badge
-            variant="outline"
-            className={cn("capitalize font-medium px-2.5 py-0.5", config.className, className)}
-        >
-            {config.label.toLowerCase()}
-        </Badge>
-    );
+  // 2. Mapping warna berdasarkan kategori status
+  const getStatusColor = (val: string) => {
+    switch (val) {
+      case "ACTIVE":
+      case "COMPLETE":
+      case "RECEIVED":
+      case "SUCCESS":
+        return "bg-green-500 text-white shadow-[2px_2px_0px_#064e3b]";
+
+      case "INACTIVE":
+      case "CANCEL":
+      case "REJECTED":
+      case "DELETED":
+        return "bg-red-500 text-white shadow-[2px_2px_0px_#7f1d1d]";
+
+      case "DRAFT":
+      case "PENDING":
+        return "bg-amber-200 text-black shadow-[2px_2px_0px_#78350f]";
+
+      default:
+        return "bg-slate-200 text-slate-700 shadow-[2px_2px_0px_#334155]";
+    }
+  };
+
+  return (
+    <Badge
+      className={cn(
+        "rounded-none border-none font-black text-[9px] uppercase tracking-widest px-2 py-0.5",
+        getStatusColor(s),
+        className,
+      )}
+    >
+      {s}
+    </Badge>
+  );
 }

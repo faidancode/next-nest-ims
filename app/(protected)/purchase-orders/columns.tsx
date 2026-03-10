@@ -1,5 +1,6 @@
 "use client";
 
+import { StatusBadge } from "@/components/shared/status-badge";
 import { DataTableRowActions } from "@/components/shared/table/data-table-row-actions";
 import { Badge } from "@/components/ui/badge";
 import { formatDate } from "@/lib/utils";
@@ -44,17 +45,7 @@ export const columns = (
     header: "Status",
     cell: ({ row }) => {
       const status = row.original.status;
-      return (
-        <Badge
-          className={`rounded-none border-none font-black text-[9px] uppercase tracking-widest ${
-            status === "RECEIVED"
-              ? "bg-green-500 text-white"
-              : "bg-slate-200 text-slate-700"
-          }`}
-        >
-          {status}
-        </Badge>
-      );
+      return <StatusBadge status={status} />;
     },
   },
   {

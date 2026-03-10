@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Customer } from "@/types/customer.type";
 import { DataTableRowActions } from "@/components/shared/table/data-table-row-actions";
+import { StatusBadge } from "@/components/shared/status-badge";
 
 export const columns = (
   handleDelete: (id: string) => void,
@@ -37,13 +38,10 @@ export const columns = (
     header: "Status",
     enableSorting: true,
     accessorFn: (row) => row.isActive ?? false,
-    cell: ({ getValue }) => (
-      <div
-        className={`text-[10px] font-bold uppercase tracking-widest ${getValue() ? "text-green-500" : "text-red-500"}`}
-      >
-        {getValue() ? "● Active" : "○ Inactive"}
-      </div>
-    ),
+    cell: ({ row }) => {
+      const status = row.original.isActive;
+      return <StatusBadge status={status ? "ACTIVE" : "INACTIVE"} />;
+    },
   },
   {
     id: "actions",

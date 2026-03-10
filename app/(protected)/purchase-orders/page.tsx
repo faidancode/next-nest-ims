@@ -49,7 +49,7 @@ export default function POPage() {
 
   return (
     <>
-      <AppHeader title="Purchase Logistics" />
+      <AppHeader title="Purchase Orders" />
       <div className="flex-1 space-y-4 p-8 pt-6 bg-[#fbfcfd]">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
           <div className="relative w-full max-w-sm group">

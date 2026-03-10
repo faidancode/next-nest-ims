@@ -1,8 +1,8 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 // utils/date.ts
@@ -13,5 +13,10 @@ export const formatDate = (value?: Date | string | null) => {
 
   if (isNaN(date.getTime())) return "-";
 
-  return new Intl.DateTimeFormat('id-ID').format(date);
+  return new Intl.DateTimeFormat("id-ID").format(date);
+};
+
+export const formatToDateInput = (dateString: string | null | undefined) => {
+  if (!dateString) return "";
+  return dateString.split("T")[0]; // Mengambil bagian 'YYYY-MM-DD'
 };

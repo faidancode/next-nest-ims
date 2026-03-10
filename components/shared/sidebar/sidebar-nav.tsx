@@ -19,6 +19,7 @@ import {
   CirclePile,
   Contact,
   ContactRound,
+  ShoppingCart,
   Warehouse,
 } from "lucide-react";
 import {
@@ -47,6 +48,15 @@ const SIDEBAR_ITEMS = [
     items: [
       { title: "Suppliers", url: "/suppliers" },
       { title: "Customers", url: "/customers" },
+    ],
+  },
+  {
+    title: "Orders",
+    url: "/orders",
+    icon: ShoppingCart,
+    items: [
+      { title: "Purchase Orders", url: "/purchase-orders" }, // Dari kita ke Supplier
+      { title: "Sales Orders", url: "/sales-orders" }, // Dari Customer ke kita
     ],
   },
   { title: "Warehouse", url: "/warehouses", icon: Warehouse },

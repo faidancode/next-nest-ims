@@ -3,22 +3,25 @@ import { z } from "zod";
 export const purchaseOrderStatusEnum = z.enum(["DRAFT", "RECEIVED"]);
 
 export const purchaseOrderItemSchema = z.object({
-  partId: z.string().uuid("Part is required"),
+  partId: z.uuid("Part is required"),
   quantity: z.coerce.number().positive("Quantity must be greater than 0"),
   unitPrice: z.coerce.number().min(0, "Unit price cannot be negative"),
-  receivedQty: z.coerce.number().min(0).default(0),
 });
 
 export const purchaseOrderSchema = z.object({
-  poNumber: z.string().min(1, "PO number is required").max(100),
-  supplierId: z.string().uuid("Supplier is required"),
-  status: purchaseOrderStatusEnum.default("DRAFT"),
-  orderDate: z.string().optional(),
-  expectedDate: z.string().optional().or(z.literal("")),
-  notes: z.string().optional().or(z.literal("")),
-  approvedBy: z.uuid().optional().or(z.literal("")),
-  items: z.array(purchaseOrderItemSchema).default([]),
+  poNumber: z.string().optional(),
+  supplierId: z.uuid("Please select a valid supplier"),
+  status: purchaseOrderStatusEnum,
+  orderDate: z.coerce.date().optional().nullable(),
+  expectedDate: z.coerce.date().optional().nullable(),
+  notes: z.string().optional(),
+  items: z
+    .array(purchaseOrderItemSchema)
+    .min(1, "At least one item is required"),
 });
 
-export type PurchaseOrderFormValues = z.infer<typeof purchaseOrderSchema>;
-export type PurchaseOrderItemFormValues = z.infer<typeof purchaseOrderItemSchema>;
+export type PurchaseOrderFormValues = z.input<typeof purchaseOrderSchema>;
+
+export type PurchaseOrderItemFormValues = z.input<
+  typeof purchaseOrderItemSchema
+>;
